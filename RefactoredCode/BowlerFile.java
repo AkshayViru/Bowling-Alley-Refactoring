@@ -1,19 +1,3 @@
-/* BowlerFile.java
- *
- *  Version:
- *  		$Id$
- * 
- *  Revisions:
- * 		$Log: BowlerFile.java,v $
- * 		Revision 1.5  2003/02/02 17:36:45  ???
- * 		Updated comments to match javadoc format.
- * 		
- * 		Revision 1.4  2003/02/02 16:29:52  ???
- * 		Added ControlDeskEvent and ControlDeskObserver. Updated Queue to allow access to Vector so that contents could be viewed without destroying. Implemented observer model for most of ControlDesk.
- * 		
- * 
- */
-
 /**
  * Class for interfacing with Bowler database
  *
@@ -56,6 +40,7 @@ class BowlerFile {
 			}
 		}
 		System.out.println("Nick not found...");
+		in.close();
 		return null;
 	}
 
@@ -89,10 +74,10 @@ class BowlerFile {
      * 
      */
 
-	public static Vector getBowlers()
+	public static Vector<String> getBowlers()
 		throws IOException, FileNotFoundException {
 
-		Vector allBowlers = new Vector();
+		Vector<String> allBowlers = new Vector<String>();
 
 		BufferedReader in = new BufferedReader(new FileReader(BOWLER_DAT));
 		String data;
@@ -102,6 +87,7 @@ class BowlerFile {
 			//"Nick: bowler[0] Full: bowler[1] email: bowler[2]
 			allBowlers.add(bowler[0]);
 		}
+		in.close();
 		return allBowlers;
 	}
 
