@@ -1,17 +1,6 @@
-/* ControlDeskView.java
- *
- *  Version:
- *			$Id$
- * 
- *  Revisions:
- * 		$Log$
- * 
- */
 
-/**
- * Class for representation of the control desk
- *
- */
+
+/* Class for representation of the control desk */
 
 import java.awt.*;
 import java.awt.event.*;
@@ -22,23 +11,18 @@ import javax.swing.event.*;
 import java.util.*;
 
 public class ControlDeskView implements ActionListener, Observer {
-
 	private JButton addParty, finished, assign;
 	private JFrame win;
 	private JList partyList;
-	
 	/** The maximum  number of members in a party */
 	private int maxMembers;
-	
 	private ControlDesk controlDesk;
 
 	/**
 	 * Displays a GUI representation of the ControlDesk
-	 *
-	 */
+	 **/
 
 	public ControlDeskView(ControlDesk controlDesk, int maxMembers) {
-
 		this.controlDesk = controlDesk;
 		this.maxMembers = maxMembers;
 		int numLanes = controlDesk.getNumLanes();
@@ -67,7 +51,6 @@ public class ControlDeskView implements ActionListener, Observer {
 		assignPanel.setLayout(new FlowLayout());
 		assign.addActionListener(this);
 		assignPanel.add(assign);
-//		controlsPanel.add(assignPanel);
 
 		finished = new JButton("Finished");
 		JPanel finishedPanel = new JPanel();
@@ -107,9 +90,8 @@ public class ControlDeskView implements ActionListener, Observer {
 		partyList.setVisibleRowCount(10);
 		JScrollPane partyPane = new JScrollPane(partyList);
 		partyPane.setVerticalScrollBarPolicy(
-			JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		partyPanel.add(partyPane);
-		//		partyPanel.add(partyList);
 
 		// Clean up main panel
 		colPanel.add(controlsPanel, "East");
