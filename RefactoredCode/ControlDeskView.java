@@ -70,7 +70,7 @@ public class ControlDeskView implements ActionListener, Observer {
 		while (it.hasNext()) {
 			Lane curLane = (Lane) it.next();
 			LaneStatusView laneStat = new LaneStatusView(curLane,(laneCount+1));
-			curLane.subscribe(laneStat);
+			SubscribeLane.subscribe(curLane,laneStat);
 			((Pinsetter)curLane.getPinsetter()).subscribe(laneStat);
 			JPanel lanePanel = laneStat.showLane();
 			lanePanel.setBorder(new TitledBorder("Lane" + ++laneCount ));
