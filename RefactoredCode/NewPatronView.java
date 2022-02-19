@@ -141,7 +141,7 @@ public class NewPatronView implements ActionListener {
 		return done;
 	}
 
-	public String getNick() {
+	public String getNickName() {
 		return nick;
 	}
 
