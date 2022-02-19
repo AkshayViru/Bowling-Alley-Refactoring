@@ -10,7 +10,7 @@ public class alley {
 		ControlDesk controlDesk = new ControlDesk( numLanes );
 
 		ControlDeskView cdv = new ControlDeskView( controlDesk, maxPatronsPerParty);
-		controlDesk.subscribe( cdv );
+		controlDesk.addObserver( cdv );
 
 	}
 }
