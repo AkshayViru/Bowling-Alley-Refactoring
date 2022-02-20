@@ -21,7 +21,7 @@ class BowlerFile {
      */
 
 	public static Bowler getBowlerInfo(String nickName)
-		throws IOException, FileNotFoundException {
+			throws IOException {
 
 		BufferedReader in = new BufferedReader(new FileReader(BOWLER_DAT));
 		String data;
@@ -57,7 +57,7 @@ class BowlerFile {
 		String nickName,
 		String fullName,
 		String email)
-		throws IOException, FileNotFoundException {
+			throws IOException {
 
 		String data = nickName + "\t" + fullName + "\t" + email + "\n";
 
@@ -75,7 +75,7 @@ class BowlerFile {
      */
 
 	public static Vector<String> getBowlers()
-		throws IOException, FileNotFoundException {
+			throws IOException {
 
 		Vector<String> allBowlers = new Vector<String>();
 
