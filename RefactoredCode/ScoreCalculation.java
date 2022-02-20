@@ -1,3 +1,4 @@
+//This class handles score calculation
 import java.util.HashMap;
 
 public class ScoreCalculation {
