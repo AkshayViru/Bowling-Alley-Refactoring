@@ -1,6 +1,3 @@
-import java.util.Vector;
-import java.io.*;
-
 public class alley {
 
 	public static void main(String[] args) {
