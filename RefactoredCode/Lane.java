@@ -1,6 +1,5 @@
 import java.util.Vector;
 import java.util.Iterator;
-import java.util.HashMap;
 import java.util.Date;
 
 public class Lane extends Thread implements PinsetterObserver {
@@ -170,8 +169,8 @@ public class Lane extends Thread implements PinsetterObserver {
 		
 			if (pe.pinsDownOnThisThrow() >=  0) {			// this is a real throw
 				checkRealThrow(pe);
-			} else {								//  this is not a real throw, probably a reset
 			}
+
 	}
 
 	private void checkRealThrow(PinsetterEvent pe) {
@@ -226,28 +225,6 @@ public class Lane extends Thread implements PinsetterObserver {
 	private void resetBowlerIterator() {
 		bowlerIterator = (scoreCalculator.party.getMembers()).iterator();
 	}
-
-	/** resetScores()
-	 * 
-	 * resets the scoring mechanism, must be called before scoring starts
-	 * 
-	 * @pre the party has been assigned
-	 * @post scoring system is initialized
-	 */
-//	private void resetScores() {
-//
-//		for (Object o : scoreCalculator.party.getMembers()) {
-//			int[] toPut = new int[25];
-//			for (int i = 0; i != 25; i++) {
-//				toPut[i] = -1;
-//			}
-//			scoreCalculator.scores.put(o, toPut);
-//		}
-//
-//		gameFinished = false;
-//		frameNumber = 0;
-//	}
-
 	/** assignParty()
 	 * 
 	 * assigns a party to this lane
@@ -272,28 +249,6 @@ public class Lane extends Thread implements PinsetterObserver {
 		frameNumber = 0;
 	}
 
-	/** markScore()
-	 *
-	 * Method that marks a bowlers score on the board.
-	 * 
-	 * @param Cur		The current bowler
-	 * @param frame	The frame that bowler is on
-	 * @param ball		The ball the bowler is on
-	 * @param score	The bowler's score 
-	 */
-//	private void markScore( Bowler Cur, int frame, int ball, int score ){
-//		int[] curScore;
-//		int index =  ( (frame - 1) * 2 + ball);
-//
-//		curScore = (int[]) scoreCalculator.scores.get(Cur);
-//
-//
-//		curScore[ index - 1] = score;
-//		scoreCalculator.scores.put(Cur, curScore);
-//		scoreCalculator.getScore( (int[])this.scoreCalculator.scores.get(Cur),Cur, frame ,bowlIndex,ball);
-//		publish( lanePublish() );
-//	}
-
 	/** lanePublish()
 	 *
 	 * Method that creates and returns a newly created laneEvent
@@ -305,15 +260,6 @@ public class Lane extends Thread implements PinsetterObserver {
 		return laneEvent;
 	}
 
-	/** getScore()
-	 *
-	 * Method that calculates a bowlers score
-	 * 
-	 * @param Cur		The bowler that is currently up
-	 * @param frame	The frame the current bowler is on
-	 * 
-	 * @return			The bowlers total score
-	 */
 
 
 	/** isPartyAssigned()
@@ -326,41 +272,8 @@ public class Lane extends Thread implements PinsetterObserver {
 		return scoreCalculator.partyAssigned;
 	}
 
-	/** isGameFinished
-	 *
-	 * @return true if the game is done, false otherwise
-	 */
-	public boolean isGameFinished() {
-		return gameFinished;
-	}
 
-	/** subscribe
-	 * 
-	 * Method that will add a subscriber
-	 * 
 
-	 */
-
-//	public void subscribe( LaneObserver adding ) {
-//		subscribers.add( adding );
-//	}
-
-	/** publish
-	 *
-	 * Method that publishes an event to subscribers
-	 * 
-	 * @param event	Event that is to be published
-	 */
-
-//	public void publish( LaneEvent event ) {
-//		if( subscribers.size() > 0 ) {
-//			Iterator eventIterator = subscribers.iterator();
-//
-//			while ( eventIterator.hasNext() ) {
-//				( (LaneObserver) eventIterator.next()).receiveLaneEvent( event );
-//			}
-//		}
-//	}
 
 	/**
 	 * Accessor to get this Lane's pinsetter
