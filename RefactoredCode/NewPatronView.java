@@ -129,9 +129,7 @@ public class NewPatronView implements ActionListener {
 	public String getNickName() {
 		return nick;
 	}
-	public String getNick() {
-		return nick;
-	}
+
 
 	public String getFull() {
 		return full;
