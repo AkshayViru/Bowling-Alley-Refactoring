@@ -16,8 +16,8 @@ public class ScoreReport {
 
 	private String content;
 	
-	public ScoreReport( Bowler bowler, int[] scores, int games ) {
-		String nick = bowler.getNick();
+	public ScoreReport(Bowler bowler, int[] scores, int games ) {
+		String nick = bowler.getNickName();
 		String full = bowler.getFullName();
 		Vector v = null;
 		try{
@@ -33,14 +33,14 @@ public class ScoreReport {
 		content += "\n";
 		content += "Final scores for this session: ";
 		content += scores[0];
-		for (int i = 1; i < games; i++){
+		for(int i = 1; i < games; i++){
 			content += ", " + scores[i];
 		}
 		content += ".\n";
 		content += "\n";
 		content += "\n";
 		content += "Previous scores by date: \n";
-		while (scoreIt.hasNext()){
+		while(scoreIt.hasNext()){
 			Score score = (Score) scoreIt.next();
 			content += "  " + score.getDate() + " - " +  score.getScore();
 			content += "\n";
@@ -100,25 +100,20 @@ public class ScoreReport {
 	}
 
 	public void sendln(BufferedReader in, BufferedWriter out, String s) {
+		flush(out,s);
+	}
+	public void flush(BufferedWriter out, String s){
 		try {
 			out.write(s + "\r\n");
 			out.flush();
-			// System.out.println(s);
-			s = in.readLine();
-			// System.out.println(s);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
 	public void sendln(BufferedWriter out, String s) {
-		try {
-			out.write(s + "\r\n");
-			out.flush();
-			System.out.println(s);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		flush(out,s);
+		System.out.println(s);
 	}
 
 

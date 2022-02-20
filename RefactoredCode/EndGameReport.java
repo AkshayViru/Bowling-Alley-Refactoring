@@ -26,7 +26,19 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 	private int result;
 
 	private String selectedMember;
-
+	public JPanel addPanel(String str){
+		JPanel Panel = new JPanel();
+		Panel.setLayout(new FlowLayout());
+		Panel.setBorder(new TitledBorder(str));
+		return Panel;
+	}
+	public JPanel newPanel(JButton jbutton) {
+		JPanel PatronPanel = new JPanel();
+		PatronPanel.setLayout(new FlowLayout());
+		jbutton.addActionListener(this);
+		PatronPanel.add(jbutton);
+		return PatronPanel;
+	}
 	public EndGameReport( String partyName, Party party ) {
 	
 		result =0;
@@ -46,7 +58,7 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		Vector myVector = new Vector();
 		Iterator iter = (party.getMembers()).iterator();
 		while (iter.hasNext()){
-			myVector.add( ((Bowler)iter.next()).getNick() );
+			myVector.add( ((Bowler)iter.next()).getNickName() );
 		}	
 		memberList = new JList(myVector);
 		memberList.setFixedCellWidth(120);
@@ -64,18 +76,12 @@ public class EndGameReport implements ActionListener, ListSelectionListener {
 		buttonPanel.setLayout(new GridLayout(2, 1));
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
-
+		
 		printButton = new JButton("Print Report");
-		JPanel printButtonPanel = new JPanel();
-		printButtonPanel.setLayout(new FlowLayout());
-		printButton.addActionListener(this);
-		printButtonPanel.add(printButton);
+		JPanel printButtonPanel = newPanel(printButton);
 
 		finished = new JButton("Finished");
-		JPanel finishedPanel = new JPanel();
-		finishedPanel.setLayout(new FlowLayout());
-		finished.addActionListener(this);
-		finishedPanel.add(finished);
+		JPanel finishedPanel = newPanel(finished);
 
 		buttonPanel.add(printButton);
 		buttonPanel.add(finished);

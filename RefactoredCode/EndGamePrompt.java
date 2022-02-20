@@ -23,7 +23,14 @@ public class EndGamePrompt implements ActionListener {
 	private int result;
 
 	private String selectedNick, selectedMember;
-
+	
+	public JPanel newPanel(JButton jbutton) {
+		JPanel PatronPanel = new JPanel();
+		PatronPanel.setLayout(new FlowLayout());
+		jbutton.addActionListener(this);
+		PatronPanel.add(jbutton);
+		return PatronPanel;
+	}
 	public EndGamePrompt( String partyName ) {
 
 		result =0;
@@ -50,17 +57,14 @@ public class EndGamePrompt implements ActionListener {
 
 		Insets buttonMargin = new Insets(4, 4, 4, 4);
 
+		
+		
+		
 		yesButton = new JButton("Yes");
-		JPanel yesButtonPanel = new JPanel();
-		yesButtonPanel.setLayout(new FlowLayout());
-		yesButton.addActionListener(this);
-		yesButtonPanel.add(yesButton);
+		JPanel yesButtonPanel = newPanel(yesButton);
 
 		noButton = new JButton("No");
-		JPanel noButtonPanel = new JPanel();
-		noButtonPanel.setLayout(new FlowLayout());
-		noButton.addActionListener(this);
-		noButtonPanel.add(noButton);
+		JPanel noButtonPanel = newPanel(noButton);
 
 		buttonPanel.add(yesButton);
 		buttonPanel.add(noButton);

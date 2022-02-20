@@ -91,6 +91,7 @@ public class Pinsetter {
 	private boolean foul;
 	private int throwNumber;
 
+
 	/** sendEvent()
 	 * 
 	 * Sends pinsetter events to all subscribers
@@ -98,10 +99,10 @@ public class Pinsetter {
 	 * @pre none
 	 * @post all subscribers have recieved pinsetter event with updated state
 	 * */
-	private void sendEvent(int jdpins) {	// send events when our state is changd
+	private void sendEvent(int pinsDownThisThrow) {	// send events when our state is changd
 		for (int i=0; i < subscribers.size(); i++) {
 			((PinsetterObserver)subscribers.get(i)).receivePinsetterEvent(
-				new PinsetterEvent(pins, foul, throwNumber, jdpins));
+				new PinsetterEvent(pins, foul, throwNumber, pinsDownThisThrow));
 		}
 	}
 
@@ -121,6 +122,37 @@ public class Pinsetter {
 		reset();
 	}
 
+	//
+	/** delayEvent()
+	 * @param - delay time in seconds
+	 * Adds delay in real game 
+	 */
+	public void delayEvent( int delayTime ) {
+		try {
+			Thread.sleep( delayTime );				
+		} 
+		catch (Exception e) {}
+	}
+
+	//
+	/** isPinKnockedDown()
+	 * @param - state of current pin
+	 * @return true if pin is knocked down 
+	 */
+	public boolean isPinKnockedDown( boolean currentPin ){
+		return !currentPin;
+	}
+
+	//
+	/** knockDownProbability()
+	 * @param - skills and pinluck
+	 * calculate and @return the probability of pin knock down based on skill and pinluck  
+	 */
+	public double knockDownProbability( double skill, double pinluck ){
+		return ((skill + pinluck)/2.0 * 1.2);
+	}
+
+
 	/** ballThrown()
 	 * 
 	 * Called to simulate a ball thrown comming in contact with the pinsetter
@@ -133,23 +165,22 @@ public class Pinsetter {
 		foul = false;
 		double skill = rnd.nextDouble();
 		for (int i=0; i <= 9; i++) {
-			if (pins[i]) {
+			if ( !isPinKnockedDown( pins[i] ) ) {
 				double pinluck = rnd.nextDouble();
 				if (pinluck <= .04){ 
+					
 					foul = true;
 				}
-				if ( ((skill + pinluck)/2.0 * 1.2) > .5 ){
+				if ( knockDownProbability( skill, pinluck ) > .5 ){
 					pins[i] = false;
 				} 
-				if (!pins[i]) {		// this pin just knocked down
+				if ( isPinKnockedDown( pins[i] ) ) {		// this pin just knocked down
 					count++;
 				}
 			}
 		}
 
-		try {
-			Thread.sleep(500);				// pinsetter is where delay will be in a real game
-		} catch (Exception e) {}
+		delayEvent( 500 );
 
 		sendEvent(count);
 
@@ -168,10 +199,8 @@ public class Pinsetter {
 		throwNumber = 1;
 		resetPins();
 		
-		try {
-			Thread.sleep(1000);
-		} catch (Exception e) {}
-		
+		delayEvent( 1000 );
+
 		sendEvent(-1);
 	}
 

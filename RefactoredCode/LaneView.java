@@ -6,6 +6,8 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import java.util.*;
 
 public class LaneView implements LaneObserver, ActionListener {
@@ -28,7 +30,13 @@ public class LaneView implements LaneObserver, ActionListener {
 
 	JButton maintenance;
 	Lane lane;
-
+	public JPanel newPanel(JButton jbutton) {
+		JPanel PatronPanel = new JPanel();
+		PatronPanel.setLayout(new FlowLayout());
+		jbutton.addActionListener(this);
+		PatronPanel.add(jbutton);
+		return PatronPanel;
+	}
 	public LaneView(Lane lane, int laneNum) {
 
 		this.lane = lane;
@@ -103,7 +111,7 @@ public class LaneView implements LaneObserver, ActionListener {
 			pins[i] = new JPanel();
 			pins[i].setBorder(
 				BorderFactory.createTitledBorder(
-					((Bowler) bowlers.get(i)).getNick()));
+					((Bowler) bowlers.get(i)).getNickName()));
 			pins[i].setLayout(new GridLayout(0, 10));
 			for (int k = 0; k != 10; k++) {
 				scores[i][k] = new JPanel();
@@ -145,12 +153,9 @@ public class LaneView implements LaneObserver, ActionListener {
 				buttonPanel.setLayout(new FlowLayout());
 
 				Insets buttonMargin = new Insets(4, 4, 4, 4);
-
+				
 				maintenance = new JButton("Maintenance Call");
-				JPanel maintenancePanel = new JPanel();
-				maintenancePanel.setLayout(new FlowLayout());
-				maintenance.addActionListener(this);
-				maintenancePanel.add(maintenance);
+				JPanel maintenancePanel = newPanel(maintenance);
 
 				buttonPanel.add(maintenancePanel);
 
