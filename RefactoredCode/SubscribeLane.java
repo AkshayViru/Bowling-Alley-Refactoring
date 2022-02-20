@@ -1,3 +1,4 @@
+// This class handles lane subscribe
 import java.io.Serializable;
 
 public class SubscribeLane implements Serializable {
